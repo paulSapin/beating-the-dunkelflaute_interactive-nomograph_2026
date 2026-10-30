@@ -13,6 +13,10 @@ the finance assumptions, or start from one of the worked examples of the paper (
 traced through the nomogram from A to G. The nomogram is the figure of the paper: its axes are fixed and do
 not change with the inputs.
 
+**Online:** <https://paulsapin.github.io/beating-the-dunkelflaute_interactive-nomograph_2026/>. The code and
+data behind the paper's figures are in
+[Beating-the-Dunkelflaute_SapinEtAl_Joule_2026](https://github.com/paulSapin/Beating-the-Dunkelflaute_SapinEtAl_Joule_2026).
+
 ## Reading the nomogram
 
 | Panel | Step | What it gives |
