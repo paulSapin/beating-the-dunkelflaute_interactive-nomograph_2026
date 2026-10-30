@@ -14,15 +14,6 @@ from nomogram import (SimpleNomogram, evaluateExample, DEFAULT_EXAMPLE, EXPLORAT
 
 st.set_page_config(page_title='How to beat the Dunkelflaute', layout='wide')
 
-# Worked examples of the paper (I-CAES: E1, E2; H2ES: EH2, PNNL costs)
-PRESETS = {
-    'E2 - I-CAES, 500-hour reserve': {},
-    'E1 - I-CAES, 100-hour reserve, low volatility': {'sigma': 40, 'reserveCapacity': 100},
-    'EH2 - H2ES, 100-hour reserve': {'shortTermEfficiency': 0.3, 'longTermEfficiency': 0.3,
-                                     'powerBlockSpecificCost': 3553, 'shortTermStoreSpecificCost': 6.79,
-                                     'longTermStoreSpecificCost': 6.22, 'reserveCapacity': 100},
-}
-
 # Fixed axes of panel (c): equivalent annual cost (USD/kW/year)
 EAC_RANGE = (-500, 1000)
 
@@ -41,6 +32,7 @@ def drawNomogram(example, dpi=300):
 
 
 explorationResults = loadResults()
+d = DEFAULT_EXAMPLE
 
 # Bounds of the precomputed exploration
 volatilityRange = (math.ceil(explorationResults.intraDay_volatility.min()),
@@ -54,42 +46,33 @@ st.write('Set the scene, technology and finance inputs in the sidebar.')
 st.write('The example is traced in green on the nomogram (A to G).')
 
 with st.sidebar:
-    preset = st.selectbox('Start from', list(PRESETS))
-    d = {**DEFAULT_EXAMPLE, **PRESETS[preset]}
-    key = preset  # resets the inputs when another preset is chosen
-
     st.header('Scene')
-    sigma = st.slider('Intraday electricity volatility ($/MWh)', *volatilityRange, value=int(d['sigma']),
-                      key=f'{key}sigma')
-    electricityPrice = st.slider('Electricity price ($/MWh)', 0, 200, int(d['electricityPrice']), key=f'{key}el')
-    fuelPrice = st.slider('Fuel price ($/MWh)', 0, 240, int(d['fuelPrice']), key=f'{key}fuel')
+    sigma = st.slider('Intraday electricity volatility ($/MWh)', *volatilityRange, value=int(d['sigma']))
+    electricityPrice = st.slider('Electricity price ($/MWh)', 0, 200, int(d['electricityPrice']))
+    fuelPrice = st.slider('Fuel price ($/MWh)', 0, 240, int(d['fuelPrice']))
 
     st.header('Technology')
-    selfDischargeRate = st.slider('Short-term self-discharge rate (%/day)', 0, 20, int(d['selfDischargeRate'] * 100),
-                                  key=f'{key}sdr')
+    selfDischargeRate = st.slider('Short-term self-discharge rate (%/day)', 0, 20, int(d['selfDischargeRate'] * 100))
     st.caption(f'Short-term store capacity is fixed at {SHORT_TERM_CAPACITY:g} hours.')
     shortTermEfficiency = st.slider('Short-term round-trip efficiency (%)', int(MINIMUM_EFFICIENCY * 100), 100,
-                                    round(d['shortTermEfficiency'] * 100), key=f'{key}etast')
-    reserveCapacity = st.slider('Long-term store capacity (hours)', 0, 1000, int(d['reserveCapacity']),
-                                key=f'{key}dt')
+                                    round(d['shortTermEfficiency'] * 100))
+    reserveCapacity = st.slider('Long-term store capacity (hours)', 0, 1000, int(d['reserveCapacity']))
     longTermEfficiency = st.slider('Long-term round-trip efficiency (%)', int(MINIMUM_EFFICIENCY * 100), 100,
-                                   round(d['longTermEfficiency'] * 100), key=f'{key}etalt')
+                                   round(d['longTermEfficiency'] * 100))
     fuelConsumption = st.slider('Long-term fuel consumption (%)', 0, 300, int(d['fuelConsumption'] * 100),
-                                help='Fuel consumed per unit of electricity discharged from the long-term store.',
-                                key=f'{key}rf')
+                                help='Fuel consumed per unit of electricity discharged from the long-term store.')
     powerBlockSpecificCost = st.slider('Power block specific cost ($/kW)', 0, 5000, int(d['powerBlockSpecificCost']),
-                                       step=50, key=f'{key}cp')
+                                       step=50)
     shortTermStoreSpecificCost = st.slider('Short-term store specific cost ($/kWh)', 0.0, 100.0,
-                                           float(d['shortTermStoreSpecificCost']), 0.01, key=f'{key}cst')
+                                           float(d['shortTermStoreSpecificCost']), 0.01)
     longTermStoreSpecificCost = st.slider('Long-term store specific cost ($/kWh)', 0.0, 100.0,
-                                          float(d['longTermStoreSpecificCost']), 0.01, key=f'{key}clt')
-    fixedOM = st.slider('O&M expenses ($/kW/year)', 0, 100, int(d['fixedOM']), key=f'{key}om')
+                                          float(d['longTermStoreSpecificCost']), 0.01)
+    fixedOM = st.slider('O&M expenses ($/kW/year)', 0, 100, int(d['fixedOM']))
 
     st.header('Finance')
-    discountRate = st.slider('Cost of capital (%)', 0.0, 20.0, float(d['discountRate'] * 100), 0.5, key=f'{key}i')
-    powerBlockLifetime = st.slider('Power block lifetime (years)', 1, 60, int(d['powerBlockLifetime']),
-                                   key=f'{key}np')
-    storeLifetime = st.slider('Stores lifetime (years)', 1, 100, int(d['storeLifetime']), key=f'{key}ns')
+    discountRate = st.slider('Cost of capital (%)', 0.0, 20.0, float(d['discountRate'] * 100), 0.5)
+    powerBlockLifetime = st.slider('Power block lifetime (years)', 1, 60, int(d['powerBlockLifetime']))
+    storeLifetime = st.slider('Stores lifetime (years)', 1, 100, int(d['storeLifetime']))
 
 example = {**DEFAULT_EXAMPLE,
            'sigma': sigma,

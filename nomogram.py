@@ -65,13 +65,13 @@ PROFIT_TICKS = list(range(-200, 801, 200))
 # Rated power used to normalise the annual profits of the exploration results (kW)
 POWER = 100e3
 
-# Default example: worked example E2 of the paper (I-CAES)
-DEFAULT_EXAMPLE = {'sigma': 100,                     # USD/MWh
+# Default example
+DEFAULT_EXAMPLE = {'sigma': 40,                      # USD/MWh
                    'electricityPrice': 20,           # USD/MWh
                    'fuelPrice': 40,                  # USD/MWh
                    'selfDischargeRate': 0,           # 1/day
                    'shortTermEfficiency': 0.6,
-                   'reserveCapacity': 500,           # hours
+                   'reserveCapacity': 100,           # hours
                    'longTermEfficiency': 0.6,
                    'fuelConsumption': 0,             # per kWh discharged from the long-term store
                    'powerBlockSpecificCost': 1500,   # USD/kW

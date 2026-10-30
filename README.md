@@ -9,13 +9,34 @@ revenue from intraday arbitrage while holding a strategic reserve for the rare, 
 solar output.
 
 Set the scene (volatility, electricity and fuel prices), the technology (efficiencies, store sizes, costs) and
-the finance assumptions, or start from one of the worked examples of the paper (E1, E2, EH2). The example is
+the finance assumptions. The example is
 traced through the nomogram from A to G. The nomogram is the figure of the paper: its axes are fixed and do
 not change with the inputs.
 
 **Online:** <https://paulsapin.github.io/beating-the-dunkelflaute_interactive-nomograph_2026/>. The code and
 data behind the paper's figures are in
 [Beating-the-Dunkelflaute_SapinEtAl_Joule_2026](https://github.com/paulSapin/Beating-the-Dunkelflaute_SapinEtAl_Joule_2026).
+
+## Default values
+
+| Input | Default |
+|---|---|
+| Intraday electricity volatility | 40 $/MWh |
+| Electricity price | 20 $/MWh |
+| Fuel price | 40 $/MWh |
+| Short-term self-discharge rate | 0 %/day |
+| Short-term store capacity (fixed) | 10 hours |
+| Short-term round-trip efficiency | 60 % |
+| Long-term store capacity | 100 hours |
+| Long-term round-trip efficiency | 60 % |
+| Long-term fuel consumption | 0 % |
+| Power block specific cost | 1,500 $/kW |
+| Short-term store specific cost | 10 $/kWh |
+| Long-term store specific cost | 10 $/kWh |
+| O&M expenses | 10 $/kW/year |
+| Cost of capital | 5 % |
+| Power block lifetime | 30 years |
+| Stores lifetime | 60 years |
 
 ## Reading the nomogram
 
@@ -54,7 +75,7 @@ python -m http.server
 
 and open http://localhost:8000.
 
-`python nomogram.py` writes the default example (E2) to `nomogram.png` without the web interface.
+`python nomogram.py` writes the example with the default values to `nomogram.png` without the web interface.
 
 ## Data
 
