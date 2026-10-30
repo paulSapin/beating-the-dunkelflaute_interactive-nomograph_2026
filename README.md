@@ -33,7 +33,7 @@ data behind the paper's figures are in
 | Power block specific cost | 1,500 $/kW |
 | Short-term store specific cost | 10 $/kWh |
 | Long-term store specific cost | 10 $/kWh |
-| O&M expenses | 10 $/kW/year |
+| O&M specific cost | 10 $/kW/year |
 | Cost of capital | 5 % |
 | Power block lifetime | 30 years |
 | Stores lifetime | 60 years |
@@ -48,7 +48,7 @@ data behind the paper's figures are in
 
 All quantities are per unit of rated power ($/kW/year).
 
-- Long-term expenses: `E_lt = Δt_lt (C_el / η_lt + r_fuel C_fuel) + E_O&M`
+- Long-term expenses: `E_lt = Δt_lt (C_el / η_lt + r_fuel C_fuel) + c_O&M`
 - Annualised investment cost: `AIC = CRF_p c_p + CRF_s (c_st Δt_st + c_lt Δt_lt)`
 - Capital recovery factors: `CRF_k = i (1 + i)^n_k / ((1 + i)^n_k - 1)`, for the power block (p) and the stores (s)
 - Equivalent annual cost: `EAC = AIC - (intraday profit - E_lt)`

@@ -159,7 +159,7 @@ def SimpleNomogram(results: pd.DataFrame, power: float, example: dict, *, resolu
     c_p = example['powerBlockSpecificCost']
     c_st = example['shortTermStoreSpecificCost']
     c_lt = example['longTermStoreSpecificCost']
-    E_om = example['fixedOM']
+    c_om = example['fixedOM']
     dt_st = SHORT_TERM_CAPACITY
     businessCase = evaluateExample(results, power, example)
     AIC = businessCase['AIC']
@@ -185,7 +185,7 @@ def SimpleNomogram(results: pd.DataFrame, power: float, example: dict, *, resolu
         ['', r'Power block specific cost', r'$c_\mathrm{p}$', rf'{c_p:g} \$/kW'],
         ['', r'Short-term store specific cost', r'$c_\mathrm{st}$', rf'{c_st:g} \$/kWh'],
         ['', r'Long-term store specific cost', r'$c_\mathrm{lt}$', rf'{c_lt:g} \$/kWh'],
-        ['', r'O&M expenses', r'$E_\mathrm{O&M}$', rf'{E_om:g} \$/kW/year'],
+        ['', r'O&M specific cost', r'$c_\mathrm{O&M}$', rf'{c_om:g} \$/kW/year'],
         ['', r'Cost of capital', r'$i$', rf'{example["discountRate"] * 100:g} %'],
         ['', r'Power block lifetime', r'$n_\mathrm{p}$', rf'{n_p} years'],
         ['', r'Stores lifetime', r'$n_\mathrm{s}$', rf'{n_s} years'],
@@ -580,7 +580,7 @@ def SimpleNomogram(results: pd.DataFrame, power: float, example: dict, *, resolu
 
     dft = r'Long-term expenses ' + '\n'
     dft = dft + r'$E_\mathrm{lt}\,=\,\Delta t_\mathrm{lt}$'
-    dft = dft + r'$\left(\dfrac{C_\mathrm{el}}{\eta_\mathrm{lt}}+r_\mathrm{fuel}C_\mathrm{fuel}\right)\,+\,E_\mathrm{O&M}$'
+    dft = dft + r'$\left(\dfrac{C_\mathrm{el}}{\eta_\mathrm{lt}}+r_\mathrm{fuel}C_\mathrm{fuel}\right)\,+\,c_\mathrm{O&M}$'
     ax.text(x=.95, y=.05,
              s=dft,
              ha='right', va='bottom',

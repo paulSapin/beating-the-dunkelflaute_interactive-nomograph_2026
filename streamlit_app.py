@@ -67,7 +67,7 @@ with st.sidebar:
                                            float(d['shortTermStoreSpecificCost']), 0.01)
     longTermStoreSpecificCost = st.slider('Long-term store specific cost ($/kWh)', 0.0, 100.0,
                                           float(d['longTermStoreSpecificCost']), 0.01)
-    fixedOM = st.slider('O&M expenses ($/kW/year)', 0, 100, int(d['fixedOM']))
+    fixedOM = st.slider('O&M specific cost ($/kW/year)', 0, 100, int(d['fixedOM']))
 
     st.header('Finance')
     discountRate = st.slider('Cost of capital (%)', 0.0, 20.0, float(d['discountRate'] * 100), 0.5)
